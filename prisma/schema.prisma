@@ -10,12 +10,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Article {
-  id          Int      @id @default(autoincrement())
-  title       String   @unique
-  description String?
-  body        String
-  published   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+model systemRole {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+}
+
+model user {
+  id              String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username        String
+  image           String
+  firstName       String
+  lastName        String
+  email           String
+  recipes         recipe[]
+  favoriteRecipes recipe[]   @relation(name: "favoriteRecipes")
+  sharedRecipes   recipe[]   @relation(name: "sharedRecipes")
+}
+
+model recipe {
+  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  slug         String
+  image        String
+  title        String
+  description  String
+  createdAt    DateTime      @default(dbgenerated("now()"))
+  chef         user          @relation(fields: [chefId], references: [id])
+  chefId       String        @db.Uuid
+  ingredients  ingredient[]
+  instructions instruction[]
+  favoritedBy  user[]        @relation(name: "favoriteRecipes")
+  sharedTo     user[]        @relation(name: "sharedRecipes")
+}
+
+model ingredient {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  quantity    Decimal  @db.Decimal(8, 3)
+  description String
+  createdAt   DateTime @default(dbgenerated("now()"))
+  recipe      recipe   @relation(fields: [recipeId], references: [id])
+  recipeId    String   @db.Uuid
+}
+
+model instruction {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String
+  createdAt   DateTime @default(dbgenerated("now()"))
+  recipe      recipe   @relation(fields: [recipeId], references: [id])
+  recipeId    String   @db.Uuid
 }

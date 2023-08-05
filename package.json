@@ -6,9 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "docker:rm": "docker compose rm postgres postgres-testing minio minio-init -s -f -v",
-    "docker:up": "docker compose up postgres postgres-testing minio minio-init -d",
-    "docker:restart": "npm run docker:rm && npm run docker:up && sleep 2 && npm run prisma:dev:deploy",
+    "db-stop": "supabase stop --backup",
+    "db-start": "supabase start",
+    "db-push": "prisma db push",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -41,7 +41,9 @@
     "@prisma/client": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "supabase": "^1.82.6",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

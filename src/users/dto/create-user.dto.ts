@@ -14,5 +14,8 @@ export class CreateUserDto {
     email: string;
 
     @ApiProperty()
-    image: string;
+    image?: string | null;
+
+    @ApiProperty()
+    roleId: string;
 }

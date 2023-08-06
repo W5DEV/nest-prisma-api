@@ -1,34 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { SystemRolesService } from './system-roles.service';
-import { CreateSystemRoleDto } from './dto/create-system-role.dto';
-import { UpdateSystemRoleDto } from './dto/update-system-role.dto';
+import {ApiOkResponse, ApiTags} from "@nestjs/swagger";
+import {SystemRoleEntity} from "./entities/system-role.entity";
 
+@Controller('systemRoles')
+@ApiTags('systemRoles')
 @Controller('system-roles')
 export class SystemRolesController {
   constructor(private readonly systemRolesService: SystemRolesService) {}
 
-  @Post()
-  create(@Body() createSystemRoleDto: CreateSystemRoleDto) {
-    return this.systemRolesService.create(createSystemRoleDto);
-  }
-
   @Get()
+  @ApiOkResponse({type: SystemRoleEntity})
   findAll() {
     return this.systemRolesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.systemRolesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSystemRoleDto: UpdateSystemRoleDto) {
-    return this.systemRolesService.update(+id, updateSystemRoleDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.systemRolesService.remove(+id);
-  }
 }

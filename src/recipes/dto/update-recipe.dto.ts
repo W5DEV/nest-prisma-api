@@ -1,4 +1,15 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateRecipeDto } from './create-recipe.dto';
+import {ApiProperty} from '@nestjs/swagger';
 
-export class UpdateRecipeDto extends PartialType(CreateRecipeDto) {}
+export class UpdateRecipeDto {
+    @ApiProperty()
+    title: string;
+
+    @ApiProperty()
+    slug: string;
+
+    @ApiProperty()
+    image: string;
+
+    @ApiProperty()
+    description: string;
+}

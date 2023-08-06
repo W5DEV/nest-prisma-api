@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateIngredientDto } from './create-ingredient.dto';
+import {ApiProperty} from "@nestjs/swagger";
+import {Decimal} from "@prisma/client/runtime/library";
 
-export class UpdateIngredientDto extends PartialType(CreateIngredientDto) {}
+export class UpdateIngredientDto {
+    @ApiProperty()
+    title: string;
+
+    @ApiProperty()
+    description: string;
+
+    @ApiProperty()
+    quantity: Decimal;
+}

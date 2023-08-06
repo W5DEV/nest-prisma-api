@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateInstructionDto } from './create-instruction.dto';
+import {ApiProperty} from '@nestjs/swagger';
 
-export class UpdateInstructionDto extends PartialType(CreateInstructionDto) {}
+export class UpdateInstructionDto {
+    @ApiProperty()
+    title: string;
+
+    @ApiProperty()
+    description: string;
+}

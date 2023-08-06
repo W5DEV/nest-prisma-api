@@ -10,7 +10,7 @@ CREATE TABLE "systemRole" (
 CREATE TABLE "user" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "username" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "image" TEXT,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE "user" (
 CREATE TABLE "recipe" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "slug" TEXT NOT NULL,
-    "image" TEXT NOT NULL,
+    "image" TEXT,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT now(),

@@ -47,7 +47,7 @@ model recipe {
 
 model ingredient {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
+  title       String?
   quantity    Decimal  @db.Decimal(8, 3)
   description String
   createdAt   DateTime @default(dbgenerated("now()"))
@@ -57,7 +57,7 @@ model ingredient {
 
 model instruction {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
+  title       String?
   description String
   createdAt   DateTime @default(dbgenerated("now()"))
   recipe      recipe   @relation(fields: [recipeId], references: [id])

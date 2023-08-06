@@ -1,4 +1,4 @@
-import {ingredient, instruction, recipe, user} from "@prisma/client";
+import {recipe} from "@prisma/client";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class RecipeEntity implements recipe {
@@ -21,20 +21,5 @@ export class RecipeEntity implements recipe {
     createdAt: Date;
 
     @ApiProperty()
-    chef: user;
-
-    @ApiProperty()
     chefId: string;
-
-    @ApiProperty()
-    ingredients: ingredient[];
-
-    @ApiProperty()
-    instructions: instruction[];
-
-    @ApiProperty()
-    favoritedBy: user[];
-
-    @ApiProperty()
-    sharedTo: user[];
 }

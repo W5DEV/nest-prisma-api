@@ -1,5 +1,5 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {systemRole, user} from "@prisma/client";
+import {systemRole} from "@prisma/client";
 
 export class SystemRoleEntity implements systemRole {
     @ApiProperty()
@@ -7,7 +7,4 @@ export class SystemRoleEntity implements systemRole {
 
     @ApiProperty()
     name: string;
-
-    @ApiProperty()
-    users: user[];
 }

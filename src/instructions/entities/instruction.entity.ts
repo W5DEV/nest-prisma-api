@@ -1,4 +1,4 @@
-import {instruction, recipe} from "@prisma/client";
+import {instruction} from "@prisma/client";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class InstructionEntity implements instruction {
@@ -13,9 +13,6 @@ export class InstructionEntity implements instruction {
 
     @ApiProperty()
     createdAt: Date;
-
-    @ApiProperty()
-    recipe: recipe;
 
     @ApiProperty()
     recipeId: string;

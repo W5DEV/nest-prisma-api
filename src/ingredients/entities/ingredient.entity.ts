@@ -1,4 +1,4 @@
-import {ingredient, recipe} from '@prisma/client'
+import {ingredient} from '@prisma/client'
 import {ApiProperty} from "@nestjs/swagger";
 import {Decimal} from "@prisma/client/runtime/library";
 
@@ -17,9 +17,6 @@ export class IngredientEntity implements ingredient {
 
     @ApiProperty()
     createdAt: Date;
-
-    @ApiProperty()
-    recipe: recipe;
 
     @ApiProperty()
     recipeId: string;

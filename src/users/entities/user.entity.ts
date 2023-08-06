@@ -1,4 +1,4 @@
-import {recipe, systemRole, user} from "@prisma/client";
+import {user} from "@prisma/client";
 import {ApiProperty} from "@nestjs/swagger";
 
 export class UserEntity implements user {
@@ -21,17 +21,5 @@ export class UserEntity implements user {
     email: string;
 
     @ApiProperty()
-    recipes: recipe[];
-
-    @ApiProperty()
-    role: systemRole;
-
-    @ApiProperty()
     roleId: string;
-
-    @ApiProperty()
-    favoriteRecipes: recipe[];
-
-    @ApiProperty()
-    sharedRecipes: recipe[];
 }

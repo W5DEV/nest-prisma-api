@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { RecipesService } from './recipes.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import {ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {RecipeEntity} from "./entities/recipe.entity";
+import {ApiKeyAuthGuard} from "../auth/guard/apikey-auth.guard";
 
+@UseGuards(ApiKeyAuthGuard)
 @Controller('recipes')
 @ApiTags('recipes')
 @Controller('recipes')

@@ -1,8 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import {Controller, Get, UseGuards} from '@nestjs/common';
 import { SystemRolesService } from './system-roles.service';
 import {ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {SystemRoleEntity} from "./entities/system-role.entity";
+import {ApiKeyAuthGuard} from "../auth/guard/apikey-auth.guard";
 
+@UseGuards(ApiKeyAuthGuard)
 @Controller('systemRoles')
 @ApiTags('systemRoles')
 @Controller('system-roles')

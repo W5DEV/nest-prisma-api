@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { InstructionsService } from './instructions.service';
 import { CreateInstructionDto } from './dto/create-instruction.dto';
 import { UpdateInstructionDto } from './dto/update-instruction.dto';
 import {ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
 import {InstructionEntity} from "./entities/instruction.entity";
+import {ApiKeyAuthGuard} from "../auth/guard/apikey-auth.guard";
 
+@UseGuards(ApiKeyAuthGuard)
 @Controller('instructions')
 @ApiTags('instructions')
 @Controller('instructions')

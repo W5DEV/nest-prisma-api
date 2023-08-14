@@ -1,15 +1,19 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import {Controller, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { IngredientsService } from './ingredients.service';
 import { CreateIngredientDto } from './dto/create-ingredient.dto';
 import { UpdateIngredientDto } from './dto/update-ingredient.dto';
-import {ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiSecurity, ApiTags} from "@nestjs/swagger";
 import {IngredientEntity} from "./entities/ingredient.entity";
 import {ApiKeyAuthGuard} from "../auth/guard/apikey-auth.guard";
+import { JwtAuthGuard } from "../authz/jwt-auth.guard";
 
 
 @UseGuards(ApiKeyAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('ingredients')
 @ApiTags('ingredients')
+@ApiSecurity('api-key')
+@ApiBearerAuth()
 @Controller('ingredients')
 export class IngredientsController {
   constructor(private readonly ingredientsService: IngredientsService) {}
@@ -19,20 +23,6 @@ export class IngredientsController {
   @ApiCreatedResponse({type: IngredientEntity})
   create(@Body() createIngredientDto: CreateIngredientDto) {
     return this.ingredientsService.create(createIngredientDto);
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'Get All Ingredients' })
-  @ApiOkResponse({type: IngredientEntity, isArray: true})
-  findAll() {
-    return this.ingredientsService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get Ingredient by ID' })
-  @ApiOkResponse({type: IngredientEntity})
-  findOne(@Param('id') id: string) {
-    return this.ingredientsService.findOne(id);
   }
 
   @Patch(':id')

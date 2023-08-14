@@ -3,7 +3,7 @@ import {
     IsEmail,
     IsNotEmpty,
     IsOptional,
-    IsString,
+    IsString, MinLength,
 } from 'class-validator';
 
 export class UpdateUserDto {
@@ -11,6 +11,12 @@ export class UpdateUserDto {
     @IsString()
     @ApiProperty()
     username: string;
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(12)
+    @ApiProperty()
+    password: string;
 
     @IsNotEmpty()
     @IsString()

@@ -1,14 +1,18 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import {Controller, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 import { InstructionsService } from './instructions.service';
 import { CreateInstructionDto } from './dto/create-instruction.dto';
 import { UpdateInstructionDto } from './dto/update-instruction.dto';
-import {ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags} from "@nestjs/swagger";
+import {ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiSecurity, ApiTags} from "@nestjs/swagger";
 import {InstructionEntity} from "./entities/instruction.entity";
 import {ApiKeyAuthGuard} from "../auth/guard/apikey-auth.guard";
+import { JwtAuthGuard } from "../authz/jwt-auth.guard";
 
 @UseGuards(ApiKeyAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('instructions')
 @ApiTags('instructions')
+@ApiSecurity('api-key')
+@ApiBearerAuth()
 @Controller('instructions')
 export class InstructionsController {
   constructor(private readonly instructionsService: InstructionsService) {}
@@ -18,20 +22,6 @@ export class InstructionsController {
   @ApiCreatedResponse({type: InstructionEntity})
   create(@Body() createInstructionDto: CreateInstructionDto) {
     return this.instructionsService.create(createInstructionDto);
-  }
-
-  @Get()
-  @ApiOperation({ summary: 'Get All Instructions' })
-  @ApiOkResponse({type: InstructionEntity, isArray: true})
-  findAll() {
-    return this.instructionsService.findAll();
-  }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Get Instruction by ID' })
-  @ApiOkResponse({type: InstructionEntity})
-  findOne(@Param('id') id: string) {
-    return this.instructionsService.findOne(id);
   }
 
   @Patch(':id')

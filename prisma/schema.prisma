@@ -22,7 +22,8 @@ model user {
   image           String?
   firstName       String
   lastName        String
-  email           String
+  email           String     @unique
+  password        String
   recipes         recipe[]
   role            systemRole @relation(fields: [roleId], references: [id])
   roleId          String     @db.Uuid

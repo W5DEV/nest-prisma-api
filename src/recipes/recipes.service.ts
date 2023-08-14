@@ -11,11 +11,29 @@ export class RecipesService {
   }
 
   findAll() {
-    return this.prisma.recipe.findMany();
+    return this.prisma.recipe.findMany({include: {
+        chef: {
+          select: {
+            firstName: true,
+            lastName: true,
+          }
+        },
+      },});
   }
 
   findOne(id: string) {
-    return this.prisma.recipe.findUnique({where: {id}})
+    return this.prisma.recipe.findUnique({
+      where: {id},
+      include: {
+        chef: {
+          select: {
+            firstName: true,
+            lastName: true,
+          }
+        },
+        ingredients: true,
+        instructions: true,
+      },})
   }
 
   update(id: string, updateRecipeDto: UpdateRecipeDto) {

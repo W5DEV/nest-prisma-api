@@ -10,14 +10,6 @@ export class IngredientsService {
     return this.prisma.ingredient.create({data: createIngredientDto});
   }
 
-  findAll() {
-    return this.prisma.ingredient.findMany();
-  }
-
-  findOne(id: string) {
-    return this.prisma.ingredient.findUnique({where: {id}});
-  }
-
   update(id: string, updateIngredientDto: UpdateIngredientDto) {
     return this.prisma.ingredient.update({
       where: {id},

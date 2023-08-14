@@ -10,14 +10,6 @@ export class InstructionsService {
     return this.prisma.instruction.create({data: createInstructionDto});
   }
 
-  findAll() {
-    return this.prisma.instruction.findMany();
-  }
-
-  findOne(id: string) {
-    return this.prisma.user.findUnique({where: {id}});
-  }
-
   update(id: string, updateInstructionDto: UpdateInstructionDto) {
     return this.prisma.instruction.update({
       where: {id},
